@@ -19,15 +19,6 @@ Built with **HTML, CSS, and JavaScript**, it features a clean UI, responsive des
 
 ---
 
-## 📸 Screenshots
-### Homepage
-![Homepage Preview](https://i.postimg.cc/xCPFSxzJ/Screenshot-2025-08-28-222531.png)
-
-### Popular Items
-![Popular Items](https://i.postimg.cc/FFLXBLyH/popular-items.png)
-
----
-
 ## 🛠️ Tech Stack
 - **Frontend:** HTML, CSS, JavaScript
 - **Carousel:** [Tiny Slider](https://github.com/ganlanyuan/tiny-slider)
