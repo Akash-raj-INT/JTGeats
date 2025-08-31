@@ -73,6 +73,9 @@ body { font-family: var(--font); background: #fff; color:#222; }
   color: #333;
   text-align: center;
 }
+body.modal-open {
+  overflow: hidden;
+}
 
 .cards {
   display: grid;
@@ -422,12 +425,20 @@ body { font-family: var(--font); background: #fff; color:#222; }
 }
 
 .video-container {
-  position: relative;
+  position: relative; /* Crucial for positioning the button over the video */
   display: inline-block;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease;
+  max-width: 720px; /* Adjust max-width as desired, e.g., for a 16:9 video */
+  margin: 0 auto;
+}
+
+.responsive-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
 }
 
 .video-container:hover {
@@ -441,29 +452,36 @@ body { font-family: var(--font); background: #fff; color:#222; }
   display: block;
 }
 
-.play-button {
+.custom-play-pause-btn {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--green-1);
+  transform: translate(-50%, -50%); /* Centers the button perfectly */
+  background: var(--green-1); /* Green background */
   color: white;
-  width: 70px;
+  width: 70px; /* Size of the button */
   height: 70px;
-  border-radius: 50%;
+  border-radius: 50%; /* Makes it circular */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 2.5rem; /* Icon size */
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease-in-out;
+  z-index: 10; /* Ensures it's above the video */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  opacity: 1; /* Initially visible */
 }
 
-.play-button:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-  background: #15a058;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+.custom-play-pause-btn:hover {
+  transform: translate(-50%, -50%) scale(1.05); /* Slightly enlarge on hover */
+  background: #15a058; /* Darker green on hover */
+}
+
+.custom-play-pause-btn.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* Prevents interaction when hidden */
 }
 
 /* ---------------- Contact Section ---------------- */

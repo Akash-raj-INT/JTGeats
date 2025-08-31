@@ -1,63 +1,118 @@
-// js/main.js
 (() => {
   'use strict';
 
   document.addEventListener('DOMContentLoaded', () => {
 
-    /* --------- Modal logic --------- */
+ 
     const modal = document.getElementById('modal');
     const dishInput = document.getElementById('dishInput');
     const modalTitle = document.getElementById('modalTitle');
 
     if (modal) {
-      // Handle "Request Dish" buttons from menu cards
-      document.querySelectorAll('.request-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          modal.classList.add('open');
-          modal.setAttribute('aria-hidden', 'false');
-          if (dishInput) dishInput.value = btn.dataset.name || '';
-          if (modalTitle) modalTitle.textContent = 'Request: ' + (btn.dataset.name || '');
-        });
-      });
+  // Handle "Request Dish" buttons from menu cards
 
-      // Handle "Add" buttons from menu cards
-      document.querySelectorAll('.add-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const dishName = btn.dataset.name || 'Item';
-          // You can implement add to cart functionality here
-          alert(`${dishName} added to cart!`);
-          console.log('Added to cart:', dishName);
-        });
-      });
+  document.querySelectorAll('.request-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Find the parent card element
+    const card = btn.closest('.card');
+    if (card) {
+      // Find the h3 element inside the card and get its text content
+      const dishName = card.querySelector('h3').textContent.trim();
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      if (dishInput) dishInput.value = dishName;
+      if (modalTitle) modalTitle.textContent = 'Request: ' + dishName;
+    }
+  });
+});
 
-      // Handle main "Request a Dish" button
-      document.querySelectorAll('.request-dish-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          modal.classList.add('open');
-          modal.setAttribute('aria-hidden', 'false');
-          if (dishInput) dishInput.value = '';
-          if (modalTitle) modalTitle.textContent = 'Request a Dish';
-        });
-      });
+  // Handle "Add" buttons from menu cards
+   document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Find the parent card element
+      const card = btn.closest('.card');
+      if (card) {
+        // Find the h3 element inside the card and get its text content
+        const dishName = card.querySelector('h3').textContent.trim();
+        alert(`${dishName} added to cart!`);
+        console.log('Added to cart:', dishName);
+      }
+    });
+  });
 
-      const closeModal = () => {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
+  // Handle main "Request a Dish" button
+  document.querySelectorAll('.request-dish-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      if (dishInput) dishInput.value = '';
+      if (modalTitle) modalTitle.textContent = 'Request a Dish';
+    });
+  });
+
+  const closeModal = () => {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  };
+
+  document.querySelectorAll('[data-close], .modal-close').forEach(el =>
+    el.addEventListener('click', closeModal)
+  );
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+}
+    /* --------- Custom Video Play/Pause Control --------- */
+    const myVideo = document.getElementById('myVideo');
+    const customPlayPauseBtn = document.getElementById('customPlayPauseBtn');
+
+    if (myVideo && customPlayPauseBtn) {
+      // Function to toggle play/pause state and button appearance
+      const togglePlayPause = () => {
+        if (myVideo.paused) {
+          myVideo.play();
+          customPlayPauseBtn.textContent = '⏸'; // Change to pause icon
+          customPlayPauseBtn.classList.add('hidden'); // Hide button when playing
+        } else {
+          myVideo.pause();
+          customPlayPauseBtn.textContent = '▶'; // Change to play icon
+          customPlayPauseBtn.classList.remove('hidden'); // Show button when paused
+        }
       };
 
-      document.querySelectorAll('[data-close], .modal-close').forEach(el =>
-        el.addEventListener('click', closeModal)
-      );
+      // Initial state: if video is set to autoplay, hide the button after a delay
+      if (myVideo.autoplay && !myVideo.paused) {
+        customPlayPauseBtn.textContent = '⏸'; // Initial icon is pause
+        setTimeout(() => {
+          customPlayPauseBtn.classList.add('hidden');
+        }, 500); // Hide after a short delay
+      } else {
+        customPlayPauseBtn.textContent = '▶'; // Initial icon is play
+        customPlayPauseBtn.classList.remove('hidden'); // Ensure visible if not autoplaying
+      }
 
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-    }
+      // Click event for the custom button
+      customPlayPauseBtn.addEventListener('click', togglePlayPause);
 
-    /* --------- Video Play Button --------- */
-    const playButton = document.querySelector('.play-button');
-    if (playButton) {
-      playButton.addEventListener('click', () => {
-        // You can add video play functionality here
-        alert('Video functionality can be added here!');
+      // Click event for the video itself (to toggle play/pause and button visibility)
+      myVideo.addEventListener('click', togglePlayPause);
+
+      // Show play button when video ends
+      myVideo.addEventListener('ended', () => {
+        customPlayPauseBtn.textContent = '▶';
+        customPlayPauseBtn.classList.remove('hidden');
+      });
+
+      // Show play button if video is paused by other means (e.g., browser tab change)
+      myVideo.addEventListener('pause', () => {
+        customPlayPauseBtn.textContent = '▶';
+        customPlayPauseBtn.classList.remove('hidden');
+      });
+
+      // Hide play button if video starts playing by other means
+      myVideo.addEventListener('play', () => {
+        customPlayPauseBtn.textContent = '⏸';
+        customPlayPauseBtn.classList.add('hidden');
       });
     }
 
@@ -117,7 +172,7 @@
       });
     }
 
-    /* --------- Quantity buttons --------- */
+    //Quantity buttons
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('qty-btn')) {
         e.preventDefault();
@@ -152,7 +207,7 @@
       }
     });
 
-    /* --------- Slider setup --------- */
+    //Slider setup 
     const sliderEl = document.querySelector('.my-slider');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -213,7 +268,7 @@
       isDragging = false;
     });
 
-    /* --------- Smooth scrolling for navigation links --------- */
+    //Smooth scrolling for navigation links /
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -227,7 +282,7 @@
       });
     });
 
-    /* --------- Add loading states to buttons --------- */
+    // Add loading states to buttons 
     const addLoadingState = (button, duration = 1000) => {
       const originalText = button.textContent;
       button.textContent = 'Loading...';
@@ -248,7 +303,7 @@
       });
     });
 
-    /* --------- Scroll to top functionality --------- */
+    // Scroll to top functionality 
     const createScrollToTopButton = () => {
       const scrollBtn = document.createElement('button');
       scrollBtn.innerHTML = '↑';
@@ -294,7 +349,7 @@
     // Initialize scroll to top button
     createScrollToTopButton();
 
-    /* --------- Intersection Observer for animations --------- */
+    // Intersection Observer for animations
     const observeElements = () => {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -317,7 +372,7 @@
     // Initialize animations
     observeElements();
 
-    /* --------- Cart functionality (optional enhancement) --------- */
+    // Cart functionality (optional enhancement)
     const cart = {
       items: [],
       
