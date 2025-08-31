@@ -1,31 +1,43 @@
-🥑 JTG Eats
-Welcome to JTG Eats, a beautifully designed and responsive website template for a home-cooked food delivery service. This project showcases modern web development practices with HTML, CSS, and vanilla JavaScript.
+# 🍴 JTGeats – Authentic Home Food in India
 
-✨ Features
-Responsive Design: The layout is fully responsive, ensuring a seamless experience on desktops, tablets, and mobile devices.
+JTGeats is a food delivery web app that brings **authentic home-cooked meals** straight to your doorstep.  
+Built with **HTML, CSS, and JavaScript**, it features a clean UI, responsive design, and an interactive food carousel.
 
-Hero Section: An engaging top section with a search bar to help users find their favorite dishes.
+---
 
-Menu Grid: A dynamic grid displaying various home-cooked dishes with prices, ratings, and an "Add to Cart" button.
+## 🌐 Live Demo
+👉 [JTGeats on Netlify](https://jtgs.netlify.app/)
 
-Interactive Slider: A custom JavaScript carousel for showcasing popular items with smooth scrolling and quantity controls.
+---
 
-Video Section: An embedded video section with custom play/pause controls, allowing users to watch a short clip about the service.
+## ✨ Features
+- 🏠 **Home Kitchen Section** – Explore a variety of homemade dishes.
+- ⭐ **Popular Items Slider** – Smooth scroll carousel with custom arrows.
+- 🛒 **Quantity Control** – Increment/decrement food item quantity.
+- 🥘 **Request a Dish** – Modal form to request your favorite dish.
+- 📱 **Responsive Design** – Optimized for desktop, tablet, and mobile.
 
-Request a Dish Modal: A functional pop-up form for users to make special requests, complete with form validation.
+---
 
-Contact Form: A simple and clean contact form for user inquiries.
+## 📸 Screenshots
+### Homepage
+![Homepage Preview](https://i.postimg.cc/xCPFSxzJ/Screenshot-2025-08-28-222531.png)
 
-Sticky Header & Smooth Scrolling: Enhances navigation and user experience.
+### Popular Items
+![Popular Items](https://i.postimg.cc/FFLXBLyH/popular-items.png)
 
-🚀 Deployment
-This project is deployed and live at the following URL:
+---
 
-https://jtgs.netlify.app/
+## 🛠️ Tech Stack
+- **Frontend:** HTML, CSS, JavaScript
+- **Carousel:** [Tiny Slider](https://github.com/ganlanyuan/tiny-slider)
+- **Hosting:** [Netlify](https://www.netlify.com/)
 
-💻 Technologies Used
-HTML5: For the website structure.
+---
 
-CSS3: For styling and layout, including Flexbox and Grid.
+## 🚀 Getting Started
 
-JavaScript (ES6): For all interactive functionalities, including the slider, modals, and video controls, without the need for external libraries like jQuery.
+### 1. Clone the repo
+```bash
+git clone https://github.com/your-username/jtgeats.git
+cd jtgeats
